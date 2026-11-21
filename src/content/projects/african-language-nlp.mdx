@@ -1,0 +1,77 @@
+---
+title: Evaluating and adapting language technology for African languages
+slug: african-language-nlp
+summary: Culturally grounded benchmarks, speech recognition and tokenizer adaptation for Ethiopian and other African languages.
+theme: Multilingual NLP
+status: active
+order: 2
+publications: ["proverbeval-2025", "afri-mcqa-2026", "ethio-asr-2026", "vexmlm-2026", "culturalriddles-2026"]
+code: null
+---
+
+## 1. Research motivation
+
+Large language models now claim support for hundreds of languages, but evaluation data for most African languages is thin, often translated from English, and rarely tests cultural knowledge. Without trustworthy evaluation, it is hard to tell whether a model understands Afaan Oromo, Amharic or Tigrinya, or only appears to.
+
+## 2. Problem statement
+
+Build evaluation resources that are written by native speakers and grounded in local culture, use them to measure where current models fail, and study model adaptations (speech recognition, vocabulary extension) that address those failures.
+
+## 3. Related work
+
+Existing multilingual benchmarks are largely English-centric, translated rather than native, and focused on factual knowledge. Prior speech recognition systems offer little or no support for most Ethiopian languages, and subword tokenizers trained on multilingual corpora fragment Ge'ez-script words heavily.
+
+<Pending>Add key citations (for example AfriSenti, IrokoBench, MasakhaNER, OmniASR, Glot500).</Pending>
+
+## 4. Research questions
+
+- How sensitive are LLM benchmark results for low-resource languages to the evaluation setup itself?
+- How well do current models handle culturally specific knowledge in African languages?
+- Can joint multilingual training and vocabulary extension close part of the gap for Ethiopian languages?
+
+## 5. Methodology
+
+- **ProverbEval.** Proverb-based tasks for Ethiopian languages and English, with systematic variation of answer order, prompt language and task type across many LLMs.
+- **CulturalRiddles.** Riddles written from scratch through a community effort, covering 62 cultures and 51 languages, evaluated with automatic scoring and human judgement.
+- **Ethio-ASR.** Multilingual CTC models trained jointly for speech recognition and language identification on five Ethiopian languages, built on several pretrained speech encoders.
+- **VEXMLM.** XLM-R extended with 30,000 Ge'ez-script subwords from a language-specific SentencePiece tokenizer, followed by continued masked-language-model pretraining and task fine-tuning.
+
+## 6. Experimental setup
+
+Each study compares open and proprietary models under controlled conditions. Ethio-ASR is trained and evaluated on the WAXAL corpus; VEXMLM is compared with XLM-R and Glot500 on question answering, named-entity recognition and sentiment analysis.
+
+## 7. Datasets
+
+| Resource | Languages | Released |
+| --- | --- | --- |
+| ProverbEval | Ethiopian languages and English | [Hugging Face](https://huggingface.co/datasets/israel/ProverbEval) |
+| CulturalRiddles | 51 languages, 62 cultures | See paper |
+| WAXAL (used by Ethio-ASR) | Amharic, Tigrinya, Oromo, Sidaama, Wolaytta | External corpus |
+
+## 8. Evaluation metrics
+
+Accuracy for multiple-choice tasks, word error rate (WER) for speech recognition, exact match and F1 for extractive QA, and tokenizer fertility (subword tokens per word) for vocabulary studies.
+
+## 9. Results
+
+- In ProverbEval, performance varied by **up to 50%** depending only on the order of answer choices.
+- In CulturalRiddles, the strongest models reach only **about 22% accuracy** for some communities.
+- Ethio-ASR's best model reaches an **average WER of 30.48%** on the WAXAL test set, outperforming the best OmniASR model with far fewer parameters.
+- VEXMLM reduces tokenizer fertility by **28.0%** for Amharic and **45.9%** for Tigrinya relative to XLM-R, with mixed downstream effects.
+
+## 10. Limitations
+
+Benchmarks of this kind cover a fraction of each language's cultural knowledge and rely on a limited number of annotators per language. Vocabulary extension alone can hurt performance on out-of-vocabulary words unless followed by continued pretraining.
+
+## 11. Future research directions
+
+<Pending>Add your planned next steps, for example speech-first evaluation for Afaan Oromo.</Pending>
+
+## 12. Publications
+
+<PublicationList ids="proverbeval-2025,culturalriddles-2026,ethio-asr-2026,vexmlm-2026" />
+
+## 13. Code and supplementary materials
+
+- ProverbEval evaluation code: [github.com/EthioNLP/EthioProverbEval](https://github.com/EthioNLP/EthioProverbEval)
+- VEXMLM code: [github.com/hailaykidu/VEXMLM](https://github.com/hailaykidu/VEXMLM)

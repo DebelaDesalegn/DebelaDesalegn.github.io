@@ -1,0 +1,52 @@
+---
+title: Hybrid Attribution Methods for Explainability of Predictive and Deep Generative Diffusion Models
+degree: MSc in Artificial Intelligence
+institution: Addis Ababa University
+unit: College of Technology and Built Environment
+year: 2025
+evaluation: Excellent
+pdf: null
+code: null
+---
+
+## Abstract
+
+<Pending>Paste the thesis abstract here.</Pending>
+
+## Research motivation
+
+Attribution methods are the most common tool for explaining a model's prediction, but their explanations can be unfaithful to the model or change under small perturbations of the input. Text-to-image diffusion models make the problem harder still: their outputs are images, and the question becomes which words in the prompt produced which content.
+
+## Problem formulation
+
+For a model $f : \mathcal{X} \to \mathbb{R}$ and input $x \in \mathbb{R}^d$, an attribution method returns $\phi(x) \in \mathbb{R}^d$, where $\phi_i(x)$ is the contribution of feature $i$. The thesis seeks attributions that are:
+
+- **faithful:** removing features with large $|\phi_i|$ changes $f(x)$ more than removing features with small $|\phi_i|$;
+- **sparse:** a small number of features carry most of the attribution;
+- **stable:** for a small perturbation $\delta$, $\phi(x + \delta) \approx \phi(x)$.
+
+For a diffusion model generating an image from a prompt of tokens $t_1, \dots, t_n$, the analogous goal is to attribute generated image content to each token $t_j$.
+
+<Pending>Replace or refine this formulation with the exact definitions used in the thesis.</Pending>
+
+## Methodology
+
+**FIFA (Firefly-Inspired Feature Attribution)** produces sparse, faithful explanations for tabular models using a firefly-inspired search.
+
+**DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** attributes generated image content to prompt tokens in Stable Diffusion v1.5 by combining Shapley-based attribution with gradient explanations.
+
+<Pending>Add algorithm descriptions and a pipeline figure.</Pending>
+
+## Main contributions
+
+1. FIFA, an attribution method for sparse, faithful explanations of tabular predictive models.
+2. DiffuSAGE, an attribution method linking generated image content to prompt tokens in Stable Diffusion v1.5.
+3. A quantitative evaluation of the faithfulness and stability of the resulting explanations, and user studies validating DiffuSAGE.
+
+## Experimental evaluation
+
+<Pending>Describe datasets, baselines, metrics and the user study design.</Pending>
+
+## Research findings
+
+<Pending>Summarise the main findings once you are ready to share them publicly.</Pending>

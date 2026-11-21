@@ -1,0 +1,135 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@import "@fontsource-variable/source-serif-4/opsz.css";
+@import "@fontsource-variable/source-serif-4/opsz-italic.css";
+@import "@fontsource-variable/ibm-plex-sans/index.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Palette
+  paper  #FAFAF8  page ground (neutral warm white)
+  shelf  #F1F2EF  quiet surfaces (BibTeX, tables)
+  ink    #1E2126  body text
+  ink-2  #4A505A  secondary text
+  rule   #DCDDD8  hairlines
+  accent #2F3E9E  restrained indigo for links and the owner's name
+*/
+:root {
+  --paper: #fafaf8;
+  --shelf: #f1f2ef;
+  --ink: #1e2126;
+  --ink-2: #4a505a;
+  --ink-3: #6b717b;
+  --rule: #dcddd8;
+  --accent: #2f3e9e;
+  --accent-tint: #e8ebf7;
+}
+.dark {
+  --paper: #15171b;
+  --shelf: #1d2026;
+  --ink: #e5e6e9;
+  --ink-2: #b2b6be;
+  --ink-3: #8b909a;
+  --rule: #2d3139;
+  --accent: #a6b2f4;
+  --accent-tint: #232842;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-shelf: var(--shelf);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-tint: var(--accent-tint);
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --font-sans: "IBM Plex Sans Variable", "IBM Plex Sans", system-ui, sans-serif;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+::selection {
+  background: var(--accent-tint);
+}
+
+a {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.link:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Long-form MDX content */
+.prose-research {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-bullets: var(--ink-3);
+  --tw-prose-counters: var(--ink-3);
+  --tw-prose-hr: var(--rule);
+  --tw-prose-th-borders: var(--rule);
+  --tw-prose-td-borders: var(--rule);
+  --tw-prose-code: var(--ink);
+  --tw-prose-quotes: var(--ink-2);
+}
+.prose-research h2 {
+  font-family: var(--font-serif);
+  font-weight: 560;
+  font-size: 1.4rem;
+  letter-spacing: -0.005em;
+  margin-top: 2.6em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--rule);
+}
+.prose-research h2:first-child {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+.prose-research a {
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  font-weight: 450;
+}
+.prose-research table {
+  font-size: 0.92em;
+}
+.prose-research .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.75rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,71 @@
+---
+title: Multimodal and generative AI across cultures
+slug: generative-multimodal-ai
+summary: How vision–language models use images, native languages and speech, and how to explain what diffusion models generate.
+theme: Generative and multimodal AI
+status: active
+order: 3
+publications: ["afri-mcqa-2026", "cammt-2025"]
+code: null
+---
+
+## 1. Research motivation
+
+Multimodal models are trained mostly on images and captions from a narrow set of cultures and languages. For many African communities, knowledge is carried through local imagery and spoken language, which these models rarely see.
+
+## 2. Problem statement
+
+Measure whether multimodal models can answer culturally grounded questions and translate culturally specific content when given images, native-language text and speech; and, on the generative side, explain which parts of a prompt drive a generated image.
+
+## 3. Related work
+
+Recent cultural VQA benchmarks assess global cultural knowledge but cover few African languages, and none combine native-language text with speech. Multimodal machine translation has studied visual disambiguation, but not broader cultural nuance.
+
+## 4. Research questions
+
+- How well do multimodal LLMs understand African cultural knowledge in images, text and speech?
+- Can images act as cultural context for machine translation?
+
+## 5. Methodology
+
+**Afri-MCQA** pairs culturally relevant images with parallel English and native-language questions and answers in both text and speech, collected by native speakers living where each language is spoken. Control experiments separate linguistic competence from cultural knowledge.
+
+**CaMMT** collects image–caption triples with parallel English and regional-language captions and compares vision–language models in text-only and text+image translation settings.
+
+For generative models, see [DiffuSAGE](/projects/explainable-machine-learning), which attributes generated image content to prompt tokens in Stable Diffusion v1.5.
+
+## 6. Experimental setup
+
+Afri-MCQA evaluates open-weight and proprietary multimodal LLMs on multiple-choice and open-ended VQA, in English and native languages, through text and speech. CaMMT evaluates five vision–language models with automatic metrics and human evaluation.
+
+## 7. Datasets
+
+| Dataset | Scale | Released |
+| --- | --- | --- |
+| Afri-MCQA | 7.5k Q&A pairs, 15 African languages, 12 countries | [Hugging Face](https://huggingface.co/datasets/Atnafu/Afri-MCQA) |
+| CaMMT | Over 5,800 image–caption triples | [Hugging Face](https://huggingface.co/datasets/villacu/cammt) |
+
+## 8. Evaluation metrics
+
+VQA accuracy for Afri-MCQA; automatic translation metrics and human preference judgements for CaMMT.
+
+## 9. Results
+
+- On Afri-MCQA, models perform poorly across evaluated cultures, with **near-zero accuracy** on open-ended VQA when queried in a native language or through speech, and large gaps between native languages and English in both text and speech.
+- On CaMMT, visual context generally **improves translation quality**, especially for culturally specific items, disambiguation and correct gender marking.
+
+## 10. Limitations
+
+Each language is represented by a limited set of images and annotators, so the benchmarks sample rather than cover each culture.
+
+## 11. Future research directions
+
+The Afri-MCQA findings point to speech-first approaches, culturally grounded pretraining and cross-lingual cultural transfer.
+
+## 12. Publications
+
+<PublicationList ids="afri-mcqa-2026,cammt-2025" />
+
+## 13. Code and supplementary materials
+
+Datasets are linked in the table above.

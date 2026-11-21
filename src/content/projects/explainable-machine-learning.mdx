@@ -1,0 +1,79 @@
+---
+title: Explainable machine learning with hybrid attribution
+slug: explainable-machine-learning
+summary: Attribution methods for faithful explanations of tabular predictors and text-to-image diffusion models, developed in my MSc thesis.
+theme: Explainable AI
+status: in-progress
+order: 1
+publications: []
+code: null
+---
+
+## 1. Research motivation
+
+Machine learning models increasingly inform consequential decisions, from credit approval to medical triage. Attribution methods, which assign each input feature a share of responsibility for a prediction, are the most common way to justify those decisions. Yet different attribution methods can disagree on the same prediction, and an explanation that is not faithful to the model's computation can be worse than none.
+
+Generative models raise a related but harder question. When a text-to-image diffusion model produces an image, which words in the prompt were responsible for which parts of the result?
+
+## 2. Problem statement
+
+Given a trained model $f$ and an input $x$, produce an attribution vector $\phi(x) \in \mathbb{R}^d$ that is faithful to $f$, sparse enough to be read by a person, and stable under small perturbations of $x$. For diffusion models, produce attributions from generated image content back to the prompt tokens.
+
+## 3. Related work
+
+This work builds on two families of attribution methods. Shapley-value methods attribute a prediction by averaging a feature's marginal contribution over coalitions of other features. For a value function $v$ over the feature set $N$ with $|N| = d$, the Shapley value of feature $i$ is
+
+$$
+\phi_i(v) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!\,(d - |S| - 1)!}{d!}\,\bigl[v(S \cup \{i\}) - v(S)\bigr].
+$$
+
+Gradient-based methods instead use derivatives of the output with respect to the input. Each family has known weaknesses, which motivates combining them.
+
+<Pending>Add a short paragraph positioning FIFA and DiffuSAGE against SHAP, LIME, Integrated Gradients and prior diffusion-attribution work, with citations.</Pending>
+
+## 4. Research question
+
+Can hybrid attribution methods, combining population-based search or Shapley estimation with gradient information, give explanations that are more faithful and more stable than existing methods, for both predictive and generative models?
+
+## 5. Methodology
+
+**FIFA (Firefly-Inspired Feature Attribution)** treats the search for a sparse, faithful attribution as an optimisation problem and solves it with a firefly-inspired metaheuristic, targeting tabular models.
+
+**DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** combines Shapley-style attribution with gradient explanations to attribute generated image content to prompt tokens in Stable Diffusion v1.5.
+
+<Pending>Add the formal objective for FIFA, the DiffuSAGE algorithm, and an architecture or pipeline figure. Use `<Figure src="/figures/..." caption="..." />` for images placed in `public/figures/`.</Pending>
+
+## 6. Experimental setup
+
+Explanations are evaluated quantitatively for faithfulness and stability. DiffuSAGE is additionally validated with user studies.
+
+<Pending>Add models, baselines, perturbation schemes, number of runs and study participants.</Pending>
+
+## 7. Dataset
+
+<Pending>List the tabular datasets used for FIFA and the prompt sets used for DiffuSAGE.</Pending>
+
+## 8. Evaluation metrics
+
+<Pending>Define the faithfulness and stability metrics used, for example deletion/insertion curves or rank correlation under perturbation.</Pending>
+
+## 9. Results
+
+<Pending>Add the main results tables from the thesis or manuscripts. Results will appear here once the manuscripts are public.</Pending>
+
+## 10. Limitations
+
+<Pending>Add limitations, such as computational cost of Shapley estimation and dependence on the chosen baseline.</Pending>
+
+## 11. Future research directions
+
+<Pending>Add future directions.</Pending>
+
+## 12. Publications
+
+- MSc thesis: *Hybrid Attribution Methods for Explainability of Predictive and Deep Generative Diffusion Models*, Addis Ababa University, 2025. See the [thesis page](/thesis).
+- Three first-author manuscripts (DiffuSAGE, ExplainGen and FIFA) under review at IEEE Access.
+
+## 13. Code and supplementary materials
+
+<Pending>Add repository links when the code is public.</Pending>
