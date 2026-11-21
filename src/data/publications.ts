@@ -376,7 +376,7 @@ export const manuscriptsUnderReview: Manuscript[] = [
     title: "FIFA: Firefly-Inspired Feature Attribution for Faithful and Sparse Explanations in Tabular Models",
     authors: ["Debela Desalegn Yadeta", "Beakal Gizachew Assefa"],
     summary:
-      "A gradient-free, model-agnostic attribution method that uses a binary firefly algorithm to search for the smallest feature subset that preserves a model's prediction. Across Random Forest, XGBoost, CatBoost and TabNet on three benchmark datasets, it improves on LIME, SHAP and KernelSHAP by +9.15% Insertion AUC, -8.65% Deletion AUC, +6.24% sparsity and +75% stability.",
+      "A gradient-free, model-agnostic attribution method that uses a binary firefly algorithm to search for the smallest feature subset that preserves a model's prediction. Across Random Forest, XGBoost, CatBoost and TabNet on three benchmark datasets, it gives the most faithful and the sparsest explanations compared with LIME, KernelSHAP and TreeSHAP, and the most stable ones on TabNet.",
     topics: ["Explainable AI", "Tabular ML"],
   },
   {

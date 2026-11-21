@@ -4,6 +4,8 @@ import { Pending } from "./pending";
 import { getPublication } from "@/data/publications";
 import { PublicationEntry } from "@/components/publications/publication-entry";
 import { asset } from "@/lib/site";
+import { TokenAttributionExplorer } from "@/components/research/token-attribution-explorer";
+import { AfriMcqaOverview, EthioAsrPipeline } from "@/components/research/diagrams";
 
 function Figure({ src, alt, caption, width = 1200, height = 675 }: { src: string; alt?: string; caption?: string; width?: number; height?: number }) {
   return (
@@ -32,4 +34,4 @@ function A({ href = "", ...props }: ComponentProps<"a">) {
   return <a href={href} target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
-export const mdxComponents = { Pending, Figure, PublicationList, a: A };
+export const mdxComponents = { Pending, Figure, PublicationList, TokenAttributionExplorer, AfriMcqaOverview, EthioAsrPipeline, a: A };

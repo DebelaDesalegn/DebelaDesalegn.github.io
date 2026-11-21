@@ -1,5 +1,5 @@
 ---
-title: Explainable machine learning with hybrid attribution
+title: "Explainable machine learning: FIFA and DiffuSAGE"
 slug: explainable-machine-learning
 summary: FIFA and DiffuSAGE, two attribution methods for faithful explanations of tabular predictors and text-to-image diffusion models, developed in my MSc thesis.
 theme: Explainable AI
@@ -51,17 +51,37 @@ $$
 
 with $r_{ij}$ the Hamming distance between subsets. Feature importance is the drop in confidence when a feature is removed from the best subset, $\Delta_k = P(c \mid x_{S^*}) - P(c \mid x_{S^* \setminus \{k\}})$. The method needs only model queries, not gradients.
 
+<Figure src="/figures/fifa-architecture.png" width="1600" height="960" alt="FIFA architecture: input features feed a black-box model; the firefly search scores feature subsets by the model's output and returns feature importances." caption="FIFA architecture. Candidate feature subsets are scored by querying the black-box model, and the firefly search moves toward subsets that preserve the prediction. From the FIFA manuscript." />
+
 **DiffuSAGE** combines three components. Aumann-Shapley values give a game-theoretic measure of each token's influence over the generation path. Integrated Gradients give stable gradient-based sensitivity in the latent space. Cross-attention maps from the U-Net ground each token in image regions at each denoising step. Timestep weights $w_t$ aggregate these into a token-to-region heatmap
 
 $$
 R_i = \sum_{t=1}^{T} w_t \cdot \bigl(\mathrm{Attn}_i^{t} \odot \lvert \nabla_i^{t} \rvert\bigr).
 $$
 
+<Figure src="/figures/diffusage-architecture.png" width="1600" height="663" alt="DiffuSAGE architecture: the tokenized prompt and diffusion model outputs feed DiffuSAGE, which uses a similarity score to produce token importance, timestep importance and token-to-region maps." caption="DiffuSAGE architecture. Prompt tokens, timesteps, cross-attention maps and intermediate images from the diffusion model are combined with a CLIP similarity score to produce token importance, timestep importance and token-to-region maps. From the DiffuSAGE manuscript." />
+
 ## 6. Experimental setup
 
-FIFA was evaluated on four model types: Random Forest and XGBoost on Breast Cancer, CatBoost on Diabetes, and TabNet on Adult Income, against LIME, SHAP (TreeSHAP) and KernelSHAP. Improvements were tested with one-tailed Wilcoxon signed-rank tests.
+**FIFA.** Each predictive model was tuned once by grid and randomised search on a validation split, then frozen, so every attribution method explains exactly the same trained models and the same test instances.
 
-DiffuSAGE was implemented with Hugging Face `diffusers` on Stable Diffusion v1.5 (CLIP ViT-L/14 text encoder) using NVIDIA A100 GPUs. Each prompt was generated five times, and results were compared with LIME, DF-RISE and DF-CAM under the same prompts and settings. A user study with 51 participants compared DiffuSAGE's attributions with human judgements of token importance, token-to-region alignment and timestep influence.
+| Model | Dataset |
+| --- | --- |
+| Random Forest | Breast Cancer |
+| XGBoost | Breast Cancer |
+| CatBoost | Diabetes |
+| TabNet | Adult Income |
+
+| Method | Configuration |
+| --- | --- |
+| FIFA | 40 fireflies, 60 iterations, $\alpha = 0.5$ (randomness), $\beta = 0.4$ (attractiveness), $\gamma = 1.0$ (distance decay); chosen by ablation over population size, iterations, $\alpha$, $\beta$ and $\gamma$ |
+| LIME | Tabular mode, 500 perturbed samples per input, Ridge regression surrogate |
+| KernelSHAP | 100 background samples, kernel-weighted regression |
+| TreeSHAP | Exact Shapley values on tree models (not applicable to TabNet) |
+
+For reliability and stability, every method was run 10 times per instance. Differences were tested with one-tailed Wilcoxon signed-rank tests.
+
+**DiffuSAGE.** Implemented with Hugging Face `diffusers` on Stable Diffusion v1.5 (CLIP ViT-L/14 text encoder) on NVIDIA A100 GPUs. Each prompt was generated five times, and results were compared with LIME, DF-RISE and DF-CAM under the same prompts and settings. A user study with 51 participants compared DiffuSAGE's attributions with human judgements of token importance, token-to-region alignment and timestep influence.
 
 ## 7. Datasets
 
@@ -72,26 +92,68 @@ DiffuSAGE was implemented with Hugging Face `diffusers` on Stable Diffusion v1.5
 
 ## 8. Evaluation metrics
 
-- **Faithfulness:** Insertion AUC (higher is better) and Deletion AUC (lower is better).
-- **Sparsity:** how concentrated the attribution is on few features.
-- **Stability:** how much attributions change under small input perturbations.
-- **Reliability:** consistency across repeated runs.
-- **Human alignment:** agreement between DiffuSAGE and participants in the user study.
+| Metric | What it measures | Better |
+| --- | --- | --- |
+| Insertion AUC | Area under the model-confidence curve as features are added back in order of attributed importance | Higher |
+| Deletion AUC | Area under the model-confidence curve as the most important features are removed first | Lower |
+| Sparsity | Share of features given zero attribution, so a more compact explanation | Higher |
+| Stability | Change in the attribution when small noise is added to the input, from cosine similarity | Lower |
+| Reliability | Variance of the attribution across 10 repeated runs | Lower |
+| Human alignment | Agreement between DiffuSAGE and participants in the user study | Higher |
 
 ## 9. Results
 
-**FIFA**, against LIME, SHAP and KernelSHAP:
+### FIFA
 
-| Metric | Change with FIFA |
-| --- | --- |
-| Insertion AUC | +9.15% |
-| Deletion AUC | -8.65% |
-| Sparsity | +6.24% |
-| Stability | +75% |
+The manuscript summarises FIFA's results as +9.15% Insertion AUC, -8.65% Deletion AUC, +6.24% sparsity and +75% stability relative to the baselines. The per-model results behind that summary are below, with the best value in each column in bold.
 
-FIFA's reliability advantage is significant on all models ($p < 0.00001$), and its Insertion AUC advantage over KernelSHAP and TreeSHAP is significant on all models ($p < 0.0001$). On TabNet with Adult Income, it reaches a Deletion AUC of 0.184.
+<Figure src="/figures/fifa-insertion.png" width="1025" height="496" alt="Insertion curves for one test instance: FIFA reaches high model confidence fastest (AUC 0.68), ahead of TreeSHAP (0.51), KernelSHAP (0.48) and LIME (0.42)." caption="Insertion curve for a single test instance: model confidence as features are added back in each method's order. FIFA's top-ranked features restore confidence fastest (AUC 0.68 versus 0.51 for TreeSHAP, 0.48 for KernelSHAP and 0.42 for LIME). One example, not a general result." />
 
-**DiffuSAGE** on Stable Diffusion v1.5:
+**Insertion AUC** (higher is better)
+
+| Method | Random Forest | XGBoost | CatBoost | TabNet |
+| --- | --- | --- | --- | --- |
+| KernelSHAP | 25.757 | 29.823 | 3.900 | 6.115 |
+| LIME | 26.735 | 29.917 | 4.691 | 6.403 |
+| TreeSHAP | 25.864 | 29.922 | 5.088 | n/a |
+| **FIFA** | **28.786** | **29.961** | **5.574** | **7.374** |
+
+**Deletion AUC** (lower is better)
+
+| Method | Random Forest | XGBoost | CatBoost | TabNet |
+| --- | --- | --- | --- | --- |
+| KernelSHAP | 28.342 | 29.802 | 1.738 | 1.267 |
+| LIME | 27.198 | 29.391 | 1.008 | 1.377 |
+| TreeSHAP | 28.310 | 29.382 | 0.787 | n/a |
+| **FIFA** | **24.694** | **28.885** | **0.697** | **0.184** |
+
+**Sparsity** (higher is better)
+
+| Method | Random Forest | XGBoost | CatBoost | TabNet |
+| --- | --- | --- | --- | --- |
+| KernelSHAP | 0.299 | 0.334 | 0.000 | 0.406 |
+| LIME | 0.000 | 0.000 | 0.000 | 0.071 |
+| TreeSHAP | 0.000 | 0.000 | 0.000 | n/a |
+| **FIFA** | **0.590** | **0.538** | **0.184** | **0.575** |
+
+**Stability** (lower is better)
+
+| Method | Random Forest | XGBoost | CatBoost | TabNet |
+| --- | --- | --- | --- | --- |
+| KernelSHAP | 0.128 | 0.393 | 0.017 | 0.791 |
+| LIME | 0.054 | 0.075 | 0.019 | 0.921 |
+| TreeSHAP | **0.053** | **0.051** | **0.003** | n/a |
+| FIFA | 0.116 | 0.124 | 0.015 | **0.390** |
+
+**Reliability** (lower is better): FIFA's variance across runs is 0.000 on all four models, matching TreeSHAP's exact computation, while LIME (0.004–0.007) and KernelSHAP (0.002–0.012) vary between runs.
+
+In short, FIFA gives the most faithful and the sparsest explanations on all four models. On stability, the exact TreeSHAP remains ahead on tree ensembles, while FIFA is the most stable method on TabNet, where TreeSHAP cannot be used.
+
+<Figure src="/figures/fifa-attribution.png" width="942" height="579" alt="FIFA attribution bar chart for a Breast Cancer prediction: a small set of features such as mean concave points, worst compactness and worst area receive high importance, and many receive zero." caption="FIFA attribution for one Breast Cancer prediction. A few features (mean concave points, worst compactness, worst area, worst texture) carry most of the importance and many receive exactly zero, which is the sparsity FIFA is designed for." />
+
+### DiffuSAGE
+
+<TokenAttributionExplorer />
 
 | Method | Insertion AUC | Deletion AUC |
 | --- | --- | --- |
@@ -101,6 +163,8 @@ FIFA's reliability advantage is significant on all models ($p < 0.00001$), and i
 | **DiffuSAGE** | **0.8200** | **0.5500** |
 
 In the user study, DiffuSAGE's attributions agreed with participants' judgements 83.3% of the time on average.
+
+<Figure src="/figures/diffusage-engineer.jpg" width="1600" height="452" alt="DiffuSAGE token-to-region heatmaps for the prompt an engineer wearing a helmet near a bridge, for the tokens engineer, helmet and bridge." caption="Token-to-region heatmaps for “an engineer wearing a helmet near a bridge”: each token is localised to its own region of the image. From the DiffuSAGE manuscript." />
 
 ## 10. Limitations
 

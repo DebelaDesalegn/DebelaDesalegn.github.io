@@ -99,3 +99,11 @@ For GitHub Pages under a sub-path (e.g. `username.github.io/site`), also set `NE
 ## CV
 
 The downloadable CV is `public/files/Debela_Desalegn_Yadeta_CV.pdf`. Its LaTeX source is `cv-source/cv.tex`; edit it and rebuild with `xelatex cv.tex` (uses the free Carlito font), or open it in Overleaf, then copy the new PDF over the one in `public/files/`.
+
+## Research figures
+
+Figures live in `public/figures/`. FIFA and DiffuSAGE figures are taken from your own manuscripts; the Afri-MCQA and Ethio-ASR diagrams are drawn in code (`src/components/research/diagrams.tsx`). The interactive DiffuSAGE viewer is `src/components/research/token-attribution-explorer.tsx`. In MDX you can use `<TokenAttributionExplorer />`, `<AfriMcqaOverview />`, `<EthioAsrPipeline />` and `<Figure src="/figures/..." caption="..." />`.
+
+## Research statement
+
+Edit `researchStatement` in `src/data/research.ts`. It appears at the top of `/research` and is linked from the homepage.

@@ -28,6 +28,8 @@ Can a single multilingual CTC model jointly transcribe and identify these langua
 
 Four pretrained speech encoders (AfriHuBERT 94M, MMS-300M, MMS-1B and w2v-BERT-2.0 600M) are fine-tuned with CTC. A language-ID token is prepended to each target sequence and trained with the same loss, so no separate classification head is needed.
 
+<EthioAsrPipeline />
+
 ## 6. Experimental setup
 
 Baselines: Whisper (small, medium, large-v3), SeamlessM4T-v2, MMS-1B-all and OmniASR (CTC and LLM variants, 300M to 7B). Out-of-domain evaluation on FLEURS, plus analyses of gender bias, vowel length and gemination, and training dynamics.

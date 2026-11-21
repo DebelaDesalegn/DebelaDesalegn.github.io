@@ -40,7 +40,11 @@ FIFA casts this as finding $S^{*} = \arg\max_{S} P_{\text{model}}(y = c \mid x_S
 
 **FIFA** encodes candidate feature subsets as binary "fireflies". Less fit fireflies move toward brighter ones according to $x_i \leftarrow x_i + \beta_0 e^{-\gamma r_{ij}^2}(x_j - x_i) + \alpha\epsilon_i$, with $r_{ij}$ the Hamming distance. Feature importance is the drop in prediction confidence when a feature is removed from the best subset. Only model queries are needed, so FIFA applies equally to tree ensembles and neural networks.
 
+<Figure src="/figures/fifa-architecture.png" width="1600" height="960" alt="FIFA architecture: input features feed a black-box model; the firefly search scores feature subsets by the model's output and returns feature importances." caption="FIFA architecture. Candidate feature subsets are scored by querying the black-box model, and the firefly search moves toward subsets that preserve the prediction." />
+
 **DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** computes, at each denoising step, gradients of a CLIP-based score with respect to the token embeddings, extracts the U-Net's cross-attention maps, and combines them into token-to-region heatmaps. Timestep weights derived from Shapley-based averaging aggregate the per-step attributions into token importance, timestep importance and spatial maps.
+
+<Figure src="/figures/diffusage-architecture.png" width="1600" height="663" alt="DiffuSAGE architecture: the tokenized prompt and diffusion model outputs feed DiffuSAGE, which uses a similarity score to produce token importance, timestep importance and token-to-region maps." caption="DiffuSAGE architecture. Prompt tokens, timesteps, cross-attention maps and intermediate images from the diffusion model are combined with a CLIP similarity score to produce token importance, timestep importance and token-to-region maps." />
 
 See the [project page](/projects/explainable-machine-learning) for the full equations.
 
@@ -56,7 +60,10 @@ FIFA was evaluated on the Adult Income, Breast Cancer and Diabetes datasets agai
 
 ## Research findings
 
-- FIFA improves on the baselines by **+9.15% Insertion AUC**, **-8.65% Deletion AUC**, **+6.24% sparsity** and **+75% stability**. Its reliability advantage is significant on all models ($p < 0.00001$).
+<TokenAttributionExplorer />
+
+
+- FIFA gives the most faithful explanations (best Insertion and Deletion AUC) and the sparsest ones on all four models, with aggregate gains reported as **+9.15% Insertion AUC**, **-8.65% Deletion AUC**, **+6.24% sparsity** and **+75% stability**. TreeSHAP remains more stable on tree ensembles; FIFA is the most stable on TabNet. See the [per-model results](/projects/explainable-machine-learning).
 - DiffuSAGE reaches an **Insertion AUC of 0.82** and a **Deletion AUC of 0.55**, a 12.4% gain and a 9.1% reduction relative to DF-RISE and DF-CAM.
 - In the user study, DiffuSAGE's attributions agreed with participants' judgements **83.3%** of the time on average.
 - Limitations include FIFA's higher computational cost, which parallelisation reduced from about 14 seconds to about 1 second per explanation, and DiffuSAGE's weaker grounding for abstract or metaphorical prompts.
