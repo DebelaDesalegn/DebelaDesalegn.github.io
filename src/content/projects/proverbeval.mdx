@@ -1,0 +1,75 @@
+---
+title: "ProverbEval: LLM evaluation challenges for low-resource languages"
+slug: proverbeval
+summary: A proverb-based benchmark for Amharic, Afaan Oromo, Tigrinya, Ge'ez and English that shows how much LLM scores depend on the evaluation setup.
+theme: LLM evaluation
+status: published
+order: 4
+paper: proverbeval-2025
+role: Led the Afaan Oromo component.
+---
+
+## 1. Research motivation
+
+As evaluation datasets multiply, it is hard to find benchmarks that measure language understanding in low-resource languages rather than subject knowledge. Proverbs are culturally specific and linguistically rich, which makes them a good test of real understanding.
+
+## 2. Problem statement
+
+Build a culturally grounded benchmark for Ethiopian languages and study which factors in the evaluation process itself change LLM results.
+
+## 3. Related work
+
+Most LLM benchmarks are in English or translated from it, and few disentangle language understanding from knowledge of a subject. Evaluation practice for low-resource languages, including prompt language and answer ordering, has received little systematic study.
+
+## 4. Research question
+
+How sensitive are LLM benchmark results for low-resource languages to the order of answer choices, the language of the prompt and choices, and the task format?
+
+## 5. Methodology
+
+Three tasks built from proverbs: choosing the explanation that matches a proverb's meaning (four options), filling in a missing word, and generating a proverb from its description. The evaluation varies prompt language (English or native), choice language, answer order (random shuffles versus always first or always last), translate-test with NLLB-200, and zero- versus five-shot prompting.
+
+## 6. Experimental setup
+
+Models: Meta-LLaMA-3 (8B, 70B), Gemma-2 (9B, 27B), LLaMAX3-8B-Alpaca, Aya-101 and GPT-4o. Open models were scored by log-likelihood with lm-eval; GPT-4o by generation with an answer extractor.
+
+## 7. Dataset
+
+| Language | Meaning MCQ | Fill in the blank | Generation |
+| --- | --- | --- | --- |
+| Amharic | 483 | 494 | 484 |
+| Afaan Oromo | 502 | 493 | 502 |
+| Tigrinya | 380 | 503 | 380 |
+| Ge'ez | 434 | 429 | 434 |
+| English | 437 | 462 | 437 |
+
+Released on [Hugging Face](https://huggingface.co/datasets/israel/ProverbEval).
+
+## 8. Evaluation metrics
+
+Accuracy for multiple choice and fill in the blank; chrF for generation, with BLEU and TER in the appendix.
+
+## 9. Results
+
+- **Choice order changes accuracy by up to about 50%.** Meta-LLaMA-3-8B averaged about 30.6% with random shuffles, 72.8% when the answer was always first, and 8.7% when it was always last.
+- Native-language prompts generally scored lower than English prompts.
+- Bigger models were not always better; better tokenization of these languages correlated with stronger performance.
+- Aya-101 led on multiple choice (about 57.3% with English prompts); GPT-4o had the best generation chrF (about 10.8).
+- Native-language descriptions produced better proverbs than English ones, and translating proverbs into English did not help significantly.
+
+## 10. Limitations
+
+Open and closed models are not directly comparable because they were scored differently, only label-based scoring was used, language coverage was limited by volunteer availability, and a small set of LLMs was evaluated.
+
+## 11. Future research directions
+
+Wider language and cultural coverage, more open and closed models, and using these findings to design more robust multilingual benchmarks and models.
+
+## 12. Publication
+
+<PublicationList ids="proverbeval-2025" />
+
+## 13. Code and supplementary materials
+
+- Evaluation code: [github.com/EthioNLP/EthioProverbEval](https://github.com/EthioNLP/EthioProverbEval)
+- Dataset: [huggingface.co/datasets/israel/ProverbEval](https://huggingface.co/datasets/israel/ProverbEval)

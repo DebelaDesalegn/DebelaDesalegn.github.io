@@ -35,8 +35,8 @@ export const industryExperience: ExperienceItem[] = [
     organization: "Kifiya Financial Technology",
     location: "Addis Ababa",
     roles: [
-      { title: "Senior Data Scientist", start: "Sep 2026", end: "Present" },
-      { title: "Data Scientist", start: "Aug 2024", end: "Aug 2026" },
+      { title: "Senior Data Scientist", start: "Oct 2026", end: "Present" },
+      { title: "Data Scientist", start: "Aug 2024", end: "Sep 2026" },
     ],
     summary:
       "Machine learning for digital lending across 40+ financial products and 6 banks, in an ecosystem serving 875K+ customers and 5.08M+ loans.",
@@ -73,8 +73,8 @@ export const industryExperience: ExperienceItem[] = [
 /** Verified reviewing roles from your CV. */
 export const reviewing: ServiceItem[] = [
   { role: "Reviewer", venue: "NeurIPS", years: "2025, 2026" },
-  { role: "Reviewer", venue: "AfricaNLP Workshop", years: "2026" },
-  { role: "Reviewer", venue: "PanAfriCon AI", years: "2024, 2025" },
+  { role: "Reviewer", venue: "AfricaNLP Workshop", years: "2026, 2027" },
+  { role: "Reviewer", venue: "PanAfriCon AI", years: "2024, 2025, 2026" },
 ];
 
 export const programs: { title: string; detail: string; year: string }[] = [
@@ -85,5 +85,33 @@ export const programs: { title: string; detail: string; year: string }[] = [
 
 export const awards: { title: string; detail: string; year: string }[] = [
   { title: "Best Social Impact Paper, ACL 2026", detail: "For Afri-MCQA: Multimodal Cultural Question Answering for African Languages. The paper also received a Senior Area Chair Award.", year: "2026" },
-  { title: "Top MSc Graduate of 2025", detail: "College of Technology and Built Environment, Addis Ababa University.", year: "2025" },
+  {
+    title: "Certificate of Academic Excellence: Top of the 2025 MSc Graduates",
+    detail: "College of Technology and Built Environment, Addis Ababa University. Awarded for academic excellence and distinguished performance among the MSc class of 2025.",
+    year: "2025",
+  },
+  {
+    title: "Certificate of Recognition for Outstanding Student",
+    detail: "Addis Ababa University, signed by the University President and Registrar (June 2025), for outstanding performance among the Master's students of the College of Technology and Built Environment.",
+    year: "2025",
+  },
+  {
+    title: "BSc in Biomedical Engineering with Great Distinction",
+    detail: "Addis Ababa Institute of Technology, Addis Ababa University (July 2022).",
+    year: "2022",
+  },
+];
+
+/** Talks and presentations. */
+export const presentations: { title: string; detail: string; year: string }[] = [
+  {
+    title: "Oral presentation, AAU Research and Technology Expo Week 2025",
+    detail: "College of Technology and Built Environment, Addis Ababa University, 20 May 2025.",
+    year: "2025",
+  },
+  {
+    title: "Poster presentation, AAU Research and Technology Expo Week 2025",
+    detail: "College of Technology and Built Environment, Addis Ababa University, 20 May 2025.",
+    year: "2025",
+  },
 ];

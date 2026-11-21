@@ -13,6 +13,7 @@ export function personSchema() {
     jobTitle: profile.title,
     email: `mailto:${profile.email}`,
     url: profile.siteUrl,
+    image: profile.photo ? `${profile.siteUrl}${profile.photo}` : undefined,
     address: { "@type": "PostalAddress", addressLocality: "Addis Ababa", addressCountry: "ET" },
     affiliation: { "@type": "CollegeOrUniversity", name: profile.affiliation.name },
     alumniOf: { "@type": "CollegeOrUniversity", name: "Addis Ababa University" },

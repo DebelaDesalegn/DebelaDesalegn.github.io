@@ -20,6 +20,8 @@ export interface Profile {
   siteUrl: string;
   orcid: string | null;
   affiliation: { name: string; url?: string };
+  /** Path to a photo in /public, e.g. "/images/profile.jpg". null hides it. */
+  photo: string | null;
 }
 
 export type PublicationStatus = "published" | "preprint" | "under-review";
@@ -98,8 +100,20 @@ export interface ProjectFrontmatter {
   slug: string;
   summary: string;
   theme: string;
-  status: "active" | "completed" | "in-progress";
+  status: "active" | "completed" | "in-progress" | "published" | "preprint";
   order: number;
+  /** Publication id from data/publications.ts this project is based on. */
+  paper?: string;
+  /** Your role, shown under the title. */
+  role?: string;
   publications?: string[];
   code?: string | null;
+}
+
+export interface Manuscript {
+  id: string;
+  title: string;
+  authors: string[];
+  summary: string;
+  topics: string[];
 }

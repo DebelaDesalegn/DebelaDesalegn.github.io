@@ -9,7 +9,7 @@ import type { Profile } from "@/types";
 export const profile: Profile = {
   name: "Debela Desalegn Yadeta",
   shortName: "Debela Desalegn",
-  title: "AI Researcher, Senior Data Scientist, ML Engineer",
+  title: "AI Researcher, Senior Data Scientist, AI/ML Engineer",
   location: "Addis Ababa, Ethiopia",
   email: "dabedesalegn@gmail.com",
   headline: "Researching and building intelligent systems that understand, explain, and learn.",
@@ -29,6 +29,8 @@ export const profile: Profile = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
   orcid: "0009-0002-1476-2965",
   affiliation: { name: "Addis Ababa University", url: "https://www.aau.edu.et" },
+  // Put your photo at public/images/profile.jpg (portrait, at least 600 x 750 px).
+  photo: "/images/profile.jpg",
 };
 
 /** Short dated notes shown on the homepage. Newest first. */
@@ -38,11 +40,12 @@ export const news: { date: string; text: string; href?: string }[] = [
     text: "CulturalRiddles, a community-built benchmark of riddles from 62 cultures, is on arXiv.",
     href: "https://arxiv.org/abs/2610.29968",
   },
-  { date: "Sep 2026", text: "Started as Senior Data Scientist at Kifiya Financial Technology." },
+  { date: "Oct 2026", text: "Started as Senior Data Scientist at Kifiya Financial Technology." },
   {
     date: "Jul 2026",
     text: "Afri-MCQA received the Best Social Impact Paper award at ACL 2026.",
     href: "https://aclanthology.org/2026.acl-long.1869/",
   },
-  { date: "Jul 2025", text: "Completed the MSc in Artificial Intelligence at Addis Ababa University (CGPA 4.00/4.00), recognised as a Top MSc Graduate of 2025." },
+  { date: "Jul 2025", text: "Completed the MSc in Artificial Intelligence at Addis Ababa University with a CGPA of 4.00/4.00." },
+  { date: "Jun 2025", text: "Recognised as the top MSc graduate of 2025 in the College of Technology and Built Environment, and as an outstanding student by Addis Ababa University." },
 ];

@@ -1,0 +1,78 @@
+---
+title: "Afri-MCQA: multimodal cultural question answering for African languages"
+slug: afri-mcqa
+summary: A native-speaker benchmark of image-grounded questions in 15 African languages, in text and speech, showing how far multimodal models are from understanding African cultures.
+theme: Multimodal AI
+status: published
+order: 2
+paper: afri-mcqa-2026
+role: Led the Afaan Oromo component.
+---
+
+## 1. Research motivation
+
+Africa is home to over a third of the world's languages, yet these languages and cultures are barely represented in multimodal AI. Many African languages are primarily spoken, so a model that reads and sees but cannot listen misses much of how knowledge is shared.
+
+## 2. Problem statement
+
+There was no benchmark for testing whether multimodal LLMs understand African cultural knowledge when questions come with an image, in a native language, and through speech as well as text.
+
+## 3. Related work
+
+Recent cultural visual question answering benchmarks, such as CVQA, assess global cultural knowledge but cover few African languages, and none combine native-language text with speech for these languages.
+
+## 4. Research questions
+
+- How well do multimodal LLMs handle African cultural knowledge in image-grounded QA?
+- How do speech inputs compare with text inputs?
+- Do gaps between native languages and English reflect language skill or cultural knowledge?
+- How does multiple-choice compare with open-ended answering?
+
+## 5. Methodology
+
+Native speakers living in the countries where each language is spoken wrote up to three multiple-choice questions per culturally relevant image, each with one correct answer and three distractors, in both their language and English, and recorded every question as audio. Images fall into 10 categories adapted from CVQA, and annotators were asked for complex questions such as multi-hop, counting and commonsense reasoning. Language coordinators reviewed the annotations, and a validation study in five languages confirmed that independent speakers' answers matched the gold answers.
+
+## 6. Experimental setup
+
+Models were evaluated zero-shot, with a location-aware prompt, on text and audio inputs in multiple-choice and open-ended formats. Control experiments on AfriXNLI, AfriMMLU, language identification and speech recognition separate linguistic competence from cultural knowledge.
+
+| Model family | Models |
+| --- | --- |
+| Open-weight multimodal | Qwen2.5-Omni (3B, 7B), Gemma-3n (2B, 4B) |
+| Text-only baselines | Gemma-3 (12B, 27B) |
+| Proprietary | Gemini-2.5 Pro |
+
+## 7. Dataset
+
+About 7.5k question–answer pairs across 15 African languages from 12 countries, roughly 500 per language, with parallel English and native-language text and speech. Released on [Hugging Face](https://huggingface.co/datasets/Atnafu/Afri-MCQA) under an academic licence or CC BY-NC 4.0.
+
+## 8. Evaluation metrics
+
+Accuracy for multiple choice; an LLM judge (GPT-4o-mini) for semantic match on open-ended answers, validated against human ratings with Krippendorff's alpha; chrF++ for open-ended responses; word error rate for speech recognition.
+
+## 9. Results
+
+- Gemini-2.5 Pro reached about 78% on English multiple-choice and about 38% on English open-ended questions; smaller models scored roughly 50–59% and 9–24%.
+- Open-weight models scored near zero (about 2–5%) on open-ended questions asked by speech in native languages.
+- Models did better in English than in native languages, with gaps from about 2% (Gemini) to 19% (Qwen) on multiple choice.
+- On the control tasks, language gaps were much larger (13–47%), pointing to language competence as a major bottleneck.
+- The LLM judge agreed with human raters at about 0.81 Krippendorff's alpha.
+
+The paper received the **Best Social Impact Paper** award and a **Senior Area Chair Award** at ACL 2026.
+
+## 10. Limitations
+
+Fifteen languages are a small fraction of Africa's languages and cultures; culture is fluid and annotators' backgrounds may introduce bias; only a limited set of models was tested; and the dataset is sized for evaluation, not training.
+
+## 11. Future research directions
+
+Speech-first approaches for primarily oral languages, culturally grounded pretraining, and cross-lingual cultural transfer so that knowledge models hold in English is reachable in native languages.
+
+## 12. Publication
+
+<PublicationList ids="afri-mcqa-2026" />
+
+## 13. Code and supplementary materials
+
+- Dataset: [huggingface.co/datasets/Atnafu/Afri-MCQA](https://huggingface.co/datasets/Atnafu/Afri-MCQA)
+- Paper: [ACL Anthology](https://aclanthology.org/2026.acl-long.1869/)

@@ -5,6 +5,8 @@ const STATUS: Record<ProjectFrontmatter["status"], string> = {
   active: "Ongoing",
   completed: "Completed",
   "in-progress": "Manuscripts under review",
+  published: "Published",
+  preprint: "Preprint",
 };
 
 export function ProjectList({ projects }: { projects: ProjectFrontmatter[] }) {

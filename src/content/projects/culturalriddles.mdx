@@ -1,0 +1,65 @@
+---
+title: "CulturalRiddles: a multicultural benchmark of riddles"
+slug: culturalriddles
+summary: A community-written benchmark of original riddles from 62 cultures and 51 languages that tests cultural reasoning rather than factual recall.
+theme: LLM evaluation
+status: preprint
+order: 5
+paper: culturalriddles-2026
+role: One of 164 contributing authors.
+---
+
+## 1. Research motivation
+
+As LLMs support more languages, it matters more to test whether they understand the cultures behind them. Many benchmarks remain English-centric, cover few cultures, and test factual trivia rather than how cultural knowledge is used.
+
+## 2. Problem statement
+
+Build an evaluation that requires cultural reasoning in many languages, written from scratch by members of each community so that it cannot be found in training data as-is.
+
+## 3. Related work
+
+Existing cultural benchmarks focus largely on factual knowledge and translated content; riddle benchmarks have mostly covered English or a few languages.
+
+## 4. Research question
+
+How well do current LLMs solve culturally rooted riddles across languages with very different resource levels, and what kinds of errors do they make?
+
+## 5. Methodology
+
+Riddles were written by people through a participatory community effort. Solving them requires logical inference, combining ideas, cultural and social knowledge, language ability and familiarity with local associations. Models receive the riddle's culture, language, script and topic, and return an answer with brief reasoning, or "I don't know".
+
+## 6. Experimental setup
+
+28 model configurations, including frontier proprietary and open models of many sizes. Human annotators scored answers on a 0–3 scale with 13 error types, and two LLM judges were validated against about 25,000 human-labelled pairs.
+
+## 7. Dataset
+
+Original riddles covering 62 cultures in 45 countries and 51 languages, released with an open process for contributing new languages and cultures.
+
+## 8. Evaluation metrics
+
+Human-judged correctness and error type, inter-annotator agreement (Cohen's kappa), and agreement between LLM judges and humans.
+
+## 9. Results
+
+- Even the strongest models reach only **about 22% accuracy** for some communities.
+- Compared with high-resource languages, the adjusted odds of a correct answer fall to about 0.49 for medium-resource, 0.10 for low-resource and 0.04 for extremely low-resource languages.
+- Hallucination is the most common error, and models rarely abstain.
+- A jury of LLM judges agreed with humans on 91.93% of cases.
+
+## 10. Limitations
+
+LLM judges are lenient, double annotation was limited by volunteer availability, some communities lacked valid human labels, and answer rarity is only a lexical proxy for cultural knowledge.
+
+## 11. Future research directions
+
+Expanding linguistic and cultural coverage through the open contribution process.
+
+## 12. Publication
+
+<PublicationList ids="culturalriddles-2026" />
+
+## 13. Code and supplementary materials
+
+- Paper: [arXiv:2610.29968](https://arxiv.org/abs/2610.29968)

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { PageHeader, Section } from "@/components/ui/section";
 import { ExperienceList, ServiceTable, SimpleList } from "@/components/academic/academic-blocks";
-import { academicExperience, reviewing, programs } from "@/data/experience";
+import { academicExperience, reviewing, programs, presentations } from "@/data/experience";
 
 export const metadata: Metadata = {
   title: "Teaching and service",
-  description: "Teaching at Addis Ababa University and Aperion AI, reviewing for NeurIPS, AfricaNLP and PanAfriCon AI, and mentorship programmes.",
+  description: "Teaching at Addis Ababa University and Aperion AI, reviewing for NeurIPS, AfricaNLP and PanAfriCon AI, talks, and mentorship programmes.",
   alternates: { canonical: "/teaching" },
 };
 
@@ -29,6 +29,9 @@ export default function TeachingPage() {
       </Section>
       <Section id="reviewing" title="Reviewing">
         <ServiceTable items={reviewing} />
+      </Section>
+      <Section id="talks" title="Talks and presentations">
+        <SimpleList items={presentations} />
       </Section>
       <Section id="programs" title="Programmes and mentorship">
         <SimpleList items={programs} />

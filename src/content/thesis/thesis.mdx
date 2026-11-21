@@ -1,52 +1,70 @@
 ---
-title: Hybrid Attribution Methods for Explainability of Predictive and Deep Generative Diffusion Models
+title: Attribution Methods for Explainability of Predictive and Deep Generative Diffusion Models
 degree: MSc in Artificial Intelligence
 institution: Addis Ababa University
-unit: College of Technology and Built Environment
+unit: School of Information Technology and Engineering, College of Technology and Built Environment
 year: 2025
+date: June 2025
+advisor: Dr. Beakal Gizachew
 evaluation: Excellent
-pdf: null
+pdf: https://etd.aau.edu.et/bitstreams/65e68898-5af1-4c53-813d-d60b3e8191da/download
+repository: https://etd.aau.edu.et/handle/123456789/7483
+keywords: Diffusion models, explainable AI, feature attribution, Integrated Gradients, Shapley values
 code: null
 ---
 
 ## Abstract
 
-<Pending>Paste the thesis abstract here.</Pending>
+Existing attribution methods are fragmented: they explain either predictive models or generative models, but not both. This thesis proposes two attribution methods that cover both settings.
+
+**FIFA (Firefly-Inspired Feature Attribution)** is an optimisation-based method for sparse and faithful attribution in tabular models. Evaluated on Random Forest, XGBoost, CatBoost and TabNet across the Adult Income, Breast Cancer and Diabetes datasets, it improves on SHAP and LIME with 6.24% higher sparsity, 9.15% higher Insertion AUC, 8.65% lower Deletion AUC and 75% better stability.
+
+**DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** attributes generated image content to individual prompt tokens by combining Aumann-Shapley values, Integrated Gradients and cross-attention maps. Evaluated on Stable Diffusion v1.5, trained on LAION-5B, it improves Insertion AUC by 12.4% and reduces Deletion AUC by 9.1% relative to DF-RISE and DF-CAM, and a user study shows its attributions align with human perception.
 
 ## Research motivation
 
-Attribution methods are the most common tool for explaining a model's prediction, but their explanations can be unfaithful to the model or change under small perturbations of the input. Text-to-image diffusion models make the problem harder still: their outputs are images, and the question becomes which words in the prompt produced which content.
+Attribution methods are the most common tool for explaining a model's prediction, but their explanations can be unfaithful to the model, dense, or unstable under small perturbations of the input. No widely used method satisfies faithfulness, sparsity, stability and reliability across model types at once. Text-to-image diffusion models make the problem harder: their output is an image built over many denoising steps, and existing explanations capture either the spatial or the temporal side, not both.
 
 ## Problem formulation
 
-For a model $f : \mathcal{X} \to \mathbb{R}$ and input $x \in \mathbb{R}^d$, an attribution method returns $\phi(x) \in \mathbb{R}^d$, where $\phi_i(x)$ is the contribution of feature $i$. The thesis seeks attributions that are:
+For a model $f$ and input $x \in \mathbb{R}^d$, an attribution method returns $\phi(x) \in \mathbb{R}^d$, where $\phi_i(x)$ is the contribution of feature $i$. The thesis seeks attributions that are:
 
 - **faithful:** removing features with large $|\phi_i|$ changes $f(x)$ more than removing features with small $|\phi_i|$;
 - **sparse:** a small number of features carry most of the attribution;
-- **stable:** for a small perturbation $\delta$, $\phi(x + \delta) \approx \phi(x)$.
+- **stable:** for a small perturbation $\delta$, $\phi(x + \delta) \approx \phi(x)$;
+- **reliable:** repeated runs give consistent attributions.
 
-For a diffusion model generating an image from a prompt of tokens $t_1, \dots, t_n$, the analogous goal is to attribute generated image content to each token $t_j$.
-
-<Pending>Replace or refine this formulation with the exact definitions used in the thesis.</Pending>
+FIFA casts this as finding $S^{*} = \arg\max_{S} P_{\text{model}}(y = c \mid x_S)$ over feature subsets $S$, where $c$ is the predicted class. For a diffusion model generating an image from prompt tokens $t_1, \dots, t_n$, DiffuSAGE attributes the image to each token across timesteps and image regions.
 
 ## Methodology
 
-**FIFA (Firefly-Inspired Feature Attribution)** produces sparse, faithful explanations for tabular models using a firefly-inspired search.
+**FIFA** encodes candidate feature subsets as binary "fireflies". Less fit fireflies move toward brighter ones according to $x_i \leftarrow x_i + \beta_0 e^{-\gamma r_{ij}^2}(x_j - x_i) + \alpha\epsilon_i$, with $r_{ij}$ the Hamming distance. Feature importance is the drop in prediction confidence when a feature is removed from the best subset. Only model queries are needed, so FIFA applies equally to tree ensembles and neural networks.
 
-**DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** attributes generated image content to prompt tokens in Stable Diffusion v1.5 by combining Shapley-based attribution with gradient explanations.
+**DiffuSAGE (Diffusion Shapley Attribution with Gradient Explanations)** computes, at each denoising step, gradients of a CLIP-based score with respect to the token embeddings, extracts the U-Net's cross-attention maps, and combines them into token-to-region heatmaps. Timestep weights derived from Shapley-based averaging aggregate the per-step attributions into token importance, timestep importance and spatial maps.
 
-<Pending>Add algorithm descriptions and a pipeline figure.</Pending>
+See the [project page](/projects/explainable-machine-learning) for the full equations.
 
 ## Main contributions
 
-1. FIFA, an attribution method for sparse, faithful explanations of tabular predictive models.
-2. DiffuSAGE, an attribution method linking generated image content to prompt tokens in Stable Diffusion v1.5.
-3. A quantitative evaluation of the faithfulness and stability of the resulting explanations, and user studies validating DiffuSAGE.
+1. FIFA, a gradient-free, model-agnostic attribution method for sparse and faithful explanations of tabular models, applied to both classical ensembles (Random Forest, XGBoost, CatBoost) and a deep tabular model (TabNet).
+2. DiffuSAGE, a hybrid framework that jointly uses cross-attention, gradient and Shapley-based signals to explain text-to-image diffusion models across tokens, timesteps and image regions.
+3. A quantitative evaluation of faithfulness, sparsity, stability and reliability, with significance tests, and a 51-participant user study of DiffuSAGE.
 
 ## Experimental evaluation
 
-<Pending>Describe datasets, baselines, metrics and the user study design.</Pending>
+FIFA was evaluated on the Adult Income, Breast Cancer and Diabetes datasets against LIME, SHAP and KernelSHAP, using Insertion and Deletion AUC, sparsity, stability and reliability, with one-tailed Wilcoxon signed-rank tests. DiffuSAGE was evaluated on Stable Diffusion v1.5 against LIME, DF-RISE and DF-CAM using Insertion and Deletion AUC, with each prompt generated five times, and in a user study with 51 participants.
 
 ## Research findings
 
-<Pending>Summarise the main findings once you are ready to share them publicly.</Pending>
+- FIFA improves on the baselines by **+9.15% Insertion AUC**, **-8.65% Deletion AUC**, **+6.24% sparsity** and **+75% stability**. Its reliability advantage is significant on all models ($p < 0.00001$).
+- DiffuSAGE reaches an **Insertion AUC of 0.82** and a **Deletion AUC of 0.55**, a 12.4% gain and a 9.1% reduction relative to DF-RISE and DF-CAM.
+- In the user study, DiffuSAGE's attributions agreed with participants' judgements **83.3%** of the time on average.
+- Limitations include FIFA's higher computational cost, which parallelisation reduced from about 14 seconds to about 1 second per explanation, and DiffuSAGE's weaker grounding for abstract or metaphorical prompts.
+
+## Thesis structure
+
+1. Introduction
+2. Literature review
+3. Methodology
+4. Experimentation
+5. Conclusion and recommendation

@@ -1,0 +1,126 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,margin=1.55cm,top=1.35cm,bottom=1.4cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Carlito}
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{A51C30}
+\definecolor{rulegold}{HTML}{C9A227}
+\definecolor{ink}{HTML}{1E2126}
+\definecolor{muted}{HTML}{5B6270}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{microtype}
+\color{ink}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.2pt,topsep=2pt,parsep=0pt,label={\color{muted}\textbullet}}
+
+\titleformat{\section}{\Large\bfseries\color{ink}}{}{0pt}{\MakeUppercase}[{\color{rulegold}\titlerule[1.2pt]}]
+\titlespacing*{\section}{0pt}{9pt}{4pt}
+
+\newcommand{\entry}[4]{% title, org, dates, place
+  {\large #1}\\[-1pt]
+  {\color{accent}\bfseries #2}\\[-1pt]
+  {\small\color{muted}#3\hfill #4}\par\vspace{1pt}}
+\newcommand{\me}{\textbf{D.\,D.~Yadeta}}
+
+\begin{document}
+
+{\fontsize{24}{26}\selectfont\bfseries DEBELA DESALEGN YADETA}\\[3pt]
+{\large\bfseries\color{accent} AI Researcher \textbar{} Senior Data Scientist \textbar{} AI/ML Engineer}\\[4pt]
+{\small\color{muted}
+\href{mailto:dabedesalegn@gmail.com}{dabedesalegn@gmail.com} \quad +251\,934\,028\,333 \quad Addis Ababa, Ethiopia \quad
+\href{https://debeladesalegn.github.io}{debeladesalegn.github.io}\\
+\href{https://scholar.google.com/citations?user=a272tZcAAAAJ}{Google Scholar} \quad
+ORCID: \href{https://orcid.org/0009-0002-1476-2965}{0009-0002-1476-2965} \quad
+\href{https://github.com/DebelaDesalegn}{github.com/DebelaDesalegn} \quad
+\href{https://www.linkedin.com/in/debela-desalegn430}{linkedin.com/in/debela-desalegn430}}
+
+\section{Research Profile}
+AI researcher working on \textbf{explainable AI}, \textbf{multilingual and low-resource NLP}, and \textbf{LLM and multimodal evaluation}. Co-author of peer-reviewed work at \textbf{ACL, NAACL and EMNLP}, including \textbf{Afri-MCQA (ACL 2026 Best Social Impact Paper)}, where I led the Afaan Oromo component. My MSc thesis developed two attribution methods, \textbf{FIFA} and \textbf{DiffuSAGE}, for faithful explanations of predictive and generative diffusion models. Research interests also include machine learning theory, generative and multimodal AI, and trustworthy ML. Industry ML experience since 2022 and university teaching since 2024. Reviewer for NeurIPS, AfricaNLP and PanAfriCon AI.
+
+\section{Education}
+\entry{M.Sc. in Artificial Intelligence}{College of Technology and Built Environment, Addis Ababa University}{Nov 2022 -- Jul 2025}{CGPA: 4.00/4.00}
+\begin{itemize}
+  \item \textbf{Thesis:} \textit{Attribution Methods for Explainability of Predictive and Deep Generative Diffusion Models} (June 2025; evaluation: Excellent). Advisor: Dr.~Beakal Gizachew. \href{https://etd.aau.edu.et/handle/123456789/7483}{AAU repository}.
+  \item Developed \textbf{FIFA} (Firefly-Inspired Feature Attribution) for sparse, faithful explanations of tabular models: +9.15\% Insertion AUC, $-$8.65\% Deletion AUC, +6.24\% sparsity and +75\% stability over SHAP and LIME. Developed \textbf{DiffuSAGE} (Diffusion Shapley Attribution with Gradient Explanations), combining Aumann-Shapley values, Integrated Gradients and cross-attention to attribute Stable Diffusion v1.5 images to prompt tokens: +12.4\% Insertion AUC and $-$9.1\% Deletion AUC over DF-RISE and DF-CAM, validated with a 51-participant user study.
+  \item \textbf{Top of the 2025 MSc graduates}, College of Technology and Built Environment.
+  \item \textbf{Coursework:} Machine Learning, Deep Learning, NLP, Computer Vision, Reinforcement Learning, Probabilistic Graphical Models, AI Fairness.
+\end{itemize}
+\vspace{2pt}
+\entry{B.Sc. in Biomedical Engineering}{Addis Ababa Institute of Technology, Addis Ababa University}{Sep 2017 -- Jul 2022}{Great Distinction}
+
+\entry{Secondary and Preparatory Education}{Amuru Secondary and Preparatory School}{Graduated 2017}{Amuru, Oromia, Ethiopia}
+\begin{itemize}
+  \item Ethiopian Higher Education Entrance Certificate Examination (Grade 12): 517/700. Ethiopian General Secondary Education Certificate Examination (Grade 10): 4.00/4.00.
+\end{itemize}
+
+\section{Publications}
+\begin{itemize}
+  \item A.\,L.~Tonja, S.~Anand, E.~Villa-Cueva, \ldots, \me, et al. ``Afri-MCQA: Multimodal cultural question answering for African languages.'' \textit{ACL 2026}, pp.~40249--40282. \textbf{Best Social Impact Paper; Senior Area Chair Award.} Led the Afaan Oromo component.
+  \item E.~Villa-Cueva, S.~Bolatzhanova, D.~Turmakhan, \ldots, \me, et al. ``CaMMT: Benchmarking culturally aware multimodal machine translation.'' \textit{Findings of EMNLP 2025}, pp.~22423--22441. Led the Afaan Oromo component.
+  \item I.\,A.~Azime, A.\,L.~Tonja, T.\,D.~Belay, \ldots, \me, et al. ``ProverbEval: Exploring LLM evaluation challenges for low-resource language understanding.'' \textit{Findings of NAACL 2025}, pp.~6265--6281. Led the Afaan Oromo component.
+  \item H.\,K.~Teklehaymanot, \me, W.~Nejdl. ``Expanding the lexicon of Ge'ez based African languages: A comparative study of Amharic and Tigrinya.'' \textit{arXiv:2607.15209}, 2026.
+  \item B.\,M.~Abdullah, I.\,A.~Azime, A.\,L.~Tonja, \ldots, \me, et al. ``Ethio-ASR: Joint multilingual speech recognition and language identification for Ethiopian languages.'' \textit{arXiv:2603.23654}, 2026.
+  \item M.\,C.~Nguyen, T.~Hu, V.~Anbalagan, et al.\ (164 authors, including \me). ``CulturalRiddles: A multicultural benchmark of riddles.'' \textit{arXiv:2610.29968}, 2026.
+  \item \me, A.\,B.~Bedane, W.\,D.~Chemma. ``Human-robot interaction: A state of the art review.'' \textit{J.\ Artif.\ Intell.\ Mach.\ Learn.\ \& Data Sci.}, 1(3):109--118, 2023. doi:10.51219/JAIMLD/Debela-D-Yadeta/14.
+\end{itemize}
+\textbf{Under review (first author)}
+\begin{itemize}
+  \item \me, B.\,G.~Assefa, A.\,B.~Yenew. ``DiffuSAGE: Spatio-temporal token attribution for deep generative diffusion models.''
+  \item \me, B.\,G.~Assefa. ``FIFA: Firefly-inspired feature attribution for faithful and sparse explanations in tabular models.''
+  \item \me, A.\,B.~Yenew, R.\,H.~Yigzaw, B.\,G.~Assefa. ``ExplainGen: Explainability techniques in generative models.''
+\end{itemize}
+
+\clearpage
+\section{Professional \& Teaching Experience}
+\entry{Senior Data Scientist}{Kifiya Financial Technology}{Oct 2026 -- Present}{Addis Ababa, Ethiopia}
+\begin{itemize}
+  \item Lead the ML lifecycle for 10+ reusable credit-risk, fraud-detection and predictive models across 40+ financial products and 6 banks; drive model validation, governance and explainability; develop LLM-based decision systems; mentor data scientists.
+\end{itemize}
+\entry{Data Scientist}{Kifiya Financial Technology}{Aug 2024 -- Sep 2026}{Addis Ababa, Ethiopia}
+\begin{itemize}
+  \item Developed 32+ credit-scoring and fraud-detection models from transaction, KYC/KYB, psychometric, repayment and alternative data, and agricultural risk models from satellite and weather data; deployed with Databricks, MLflow, FastAPI, Docker and AWS EKS.
+\end{itemize}
+\entry{Part-Time Lecturer (previously Teaching Assistant)}{School of Information Technology and Engineering, Addis Ababa University}{Feb 2024 -- Present}{Addis Ababa, Ethiopia}
+\begin{itemize}
+  \item Teach ML, NLP, computer vision and reinforcement learning (about 60 students per semester); supervised 30+ student AI/ML projects.
+\end{itemize}
+\entry{AI/ML Instructor (Part-Time, Remote)}{Aperion AI}{Feb 2026 -- Present}{Virginia, United States}
+\begin{itemize}
+  \item Design and deliver hands-on training in ML, deep learning, NLP, LLMs, agentic AI and MLOps.
+\end{itemize}
+\entry{AI Specialist (Part-Time)}{HABTech Solutions PLC}{Sep 2025 -- Jan 2026}{Addis Ababa, Ethiopia}
+\begin{itemize}
+  \item Built LLM-powered analytics over structured and unstructured healthcare data with privacy and data-governance controls.
+\end{itemize}
+\entry{AI/ML Engineer}{Addisway Technology Solution}{Sep 2022 -- Aug 2024}{Addis Ababa, Ethiopia}
+\begin{itemize}
+  \item Developed and deployed ML models and conversational chatbots for health applications.
+\end{itemize}
+
+\section{Awards \& Honours}
+\begin{itemize}
+  \item \textbf{Best Social Impact Paper} and \textbf{Senior Area Chair Award}, ACL 2026, for Afri-MCQA.
+  \item \textbf{Certificate of Academic Excellence: Top of the 2025 MSc Graduates}, College of Technology and Built Environment, Addis Ababa University (2025).
+  \item \textbf{Certificate of Recognition for Outstanding Student}, Addis Ababa University (June 2025).
+  \item \textbf{B.Sc.\ with Great Distinction}, Addis Ababa Institute of Technology (July 2022).
+\end{itemize}
+
+\section{Service, Talks \& Programs}
+\begin{itemize}
+  \item \textbf{Reviewer:} NeurIPS 2025, 2026; AfricaNLP 2026, 2027; PanAfriCon AI 2024, 2025, 2026.
+  \item \textbf{Talks:} Oral and poster presentations, AAU Research and Technology Expo Week 2025, College of Technology and Built Environment (May 2025).
+  \item \textbf{Programs:} Emerging Leaders in AI (ELAI) Grad Prep Program (2024/25); AI for Global Health Innovation Challenge, Finalist (2024); ML4H Career Mentorship (2023).
+\end{itemize}
+
+\section{Skills \& Languages}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\textbf{ML \& NLP} & PyTorch, Hugging Face, scikit-learn, TensorFlow, LightGBM, XGBoost, LLM evaluation, multilingual benchmarks, SHAP/LIME \\
+\textbf{Data \& MLOps} & Python, C++, SQL, PySpark, Databricks, Git, MLflow, Docker, FastAPI, AWS EKS, Kubernetes, \LaTeX \\
+\textbf{Languages} & Afaan Oromo (native), Amharic (native-level), English (fluent; full academic and professional use) \\
+\end{tabularx}
+
+\end{document}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader, Section } from "@/components/ui/section";
 import { EducationList, ServiceTable, SimpleList } from "@/components/academic/academic-blocks";
 import { education } from "@/data/education";
-import { academicExperience, industryExperience, awards, reviewing } from "@/data/experience";
+import { academicExperience, industryExperience, awards, reviewing, presentations } from "@/data/experience";
 import { sortedPublications, manuscriptsUnderReview } from "@/data/publications";
 import { asset } from "@/lib/site";
 
@@ -43,7 +43,7 @@ export default function CvPage() {
           ))}
           {manuscriptsUnderReview.map((m) => (
             <li key={m.title}>
-              Debela Desalegn Yadeta, et al. <span className="font-medium">“{m.title}.”</span> {m.venue}.
+              {m.authors.join(", ")}. <span className="font-medium">“{m.title}.”</span> Under review.
             </li>
           ))}
         </ol>
@@ -66,6 +66,9 @@ export default function CvPage() {
       </Section>
       <Section id="awards" title="Awards">
         <SimpleList items={awards} />
+      </Section>
+      <Section id="talks" title="Talks and presentations">
+        <SimpleList items={presentations} />
       </Section>
       <Section id="service" title="Service">
         <ServiceTable items={reviewing} />

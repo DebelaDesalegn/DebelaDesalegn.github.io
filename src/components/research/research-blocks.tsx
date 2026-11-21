@@ -50,7 +50,7 @@ export function ContributionItem({ c, detailed = true }: { c: Contribution; deta
             </ul>
           </Row>
         )}
-        {pubs.length === 0 && <Row label="Publications">MSc thesis (2025); three manuscripts under review at IEEE Access.</Row>}
+        {pubs.length === 0 && <Row label="Publications">MSc thesis (2025) and three first-author manuscripts under review: DiffuSAGE, FIFA and ExplainGen.</Row>}
         {(c.code || c.projectSlug) && (
           <Row label="More">
             <span className="flex flex-wrap gap-x-4">

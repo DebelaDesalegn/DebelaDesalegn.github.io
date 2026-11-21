@@ -1,0 +1,67 @@
+---
+title: "CaMMT: culturally aware multimodal machine translation"
+slug: cammt
+summary: A benchmark of 5,817 image–caption triples in 19 languages testing whether images help vision–language models translate culturally specific content.
+theme: Multimodal AI
+status: published
+order: 3
+paper: cammt-2025
+role: Led the Afaan Oromo component.
+---
+
+## 1. Research motivation
+
+Culturally specific content is hard to translate because language alone may not carry enough context to capture region-specific meaning. Images can supply that context, but it was unclear whether vision–language models actually use it.
+
+## 2. Problem statement
+
+Measure whether adding an image improves machine translation of culturally grounded captions, and in which situations.
+
+## 3. Related work
+
+Multimodal machine translation grounds sentences in images, and benchmarks such as CoMMuTe evaluate visual disambiguation, but they do not address broader cultural nuance across many regions.
+
+## 4. Research question
+
+Can images act as cultural context in translation, and does visual grounding help preserve culturally specific items, disambiguate meaning and mark gender correctly?
+
+## 5. Methodology
+
+Question–answer pairs from CVQA were turned into declarative captions in English and each regional language. Native-speaker co-authors corrected them, checked that cultural items were kept, and labelled each caption as not culturally relevant, culturally relevant, or containing a cultural item. For captions with cultural items, annotators also wrote versions that conserve or substitute the item and chose their preferred one.
+
+## 6. Experimental setup
+
+Five vision–language models (Gemma 3 27B and 12B, two Qwen2.5-VL sizes including 32B, and Gemini 2.0 Flash) translated with and without the image, from each regional language to English and from English to each regional language. NLLB-3.3B served as a strong text-only baseline, and replacing the image with an unrelated one served as a control.
+
+## 7. Dataset
+
+5,817 image–caption triples across 19 languages and 23 region–language pairs, including Amharic and Oromo (Ethiopia), Swahili (Kenya) and Igbo (Nigeria), with a 1,550-sample subset for cultural-item analysis. Released on [Hugging Face](https://huggingface.co/datasets/villacu/cammt).
+
+## 8. Evaluation metrics
+
+chrF++ (main metric), BLEU and BERTScore, plus human pairwise preference between text-only and image-augmented translations, with the reason for each choice.
+
+## 9. Results
+
+- Native speakers preferred the image-augmented translation in **85 of 126** comparisons (67.5%).
+- chrF++ gains were small but consistent, clearest when translating into English (for example +2.5 for Qwen2.5-VL 32B).
+- An unrelated image lowered scores, so the gains come from the image content.
+- Preferences were driven by preserving cultural items, correct gender marking and disambiguation.
+- The best vision–language models matched or beat NLLB-3.3B, especially into English.
+
+## 10. Limitations
+
+Dataset size is bounded by the CVQA source, each region had a single annotator, specialised multimodal MT systems were not evaluated, and human evaluation used pairwise preference only.
+
+## 11. Future research directions
+
+More samples and annotators per region, models that decide when visual context should shape a translation and ignore unrelated images, better evaluation of visual context, and script-aware handling of cultural items.
+
+## 12. Publication
+
+<PublicationList ids="cammt-2025" />
+
+## 13. Code and supplementary materials
+
+- Dataset: [huggingface.co/datasets/villacu/cammt](https://huggingface.co/datasets/villacu/cammt)
+- Paper: [ACL Anthology](https://aclanthology.org/2025.findings-emnlp.1220/)

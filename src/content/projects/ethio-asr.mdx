@@ -1,0 +1,66 @@
+---
+title: "Ethio-ASR: multilingual speech recognition for Ethiopian languages"
+slug: ethio-asr
+summary: Joint speech recognition and language identification for Amharic, Tigrinya, Oromo, Sidaama and Wolaytta, beating far larger models.
+theme: Speech
+status: preprint
+order: 6
+paper: ethio-asr-2026
+---
+
+## 1. Research motivation
+
+Most Ethiopians are excluded from voice technology because existing speech recognition systems give little or no support to Ethiopian languages. As speech technology advances, this gap risks widening existing inequalities.
+
+## 2. Problem statement
+
+Build compact, open speech recognition models that also identify the language spoken, for five Ethiopian languages from the Semitic, Cushitic and Omotic branches of the Afroasiatic family.
+
+## 3. Related work
+
+Large multilingual systems such as Whisper, SeamlessM4T, MMS and OmniASR cover some of these languages, but with high error rates or very large model sizes.
+
+## 4. Research question
+
+Can a single multilingual CTC model jointly transcribe and identify these languages, and where do its errors come from?
+
+## 5. Methodology
+
+Four pretrained speech encoders (AfriHuBERT 94M, MMS-300M, MMS-1B and w2v-BERT-2.0 600M) are fine-tuned with CTC. A language-ID token is prepended to each target sequence and trained with the same loss, so no separate classification head is needed.
+
+## 6. Experimental setup
+
+Baselines: Whisper (small, medium, large-v3), SeamlessM4T-v2, MMS-1B-all and OmniASR (CTC and LLM variants, 300M to 7B). Out-of-domain evaluation on FLEURS, plus analyses of gender bias, vowel length and gemination, and training dynamics.
+
+## 7. Dataset
+
+The Ethiopian subset of the WAXAL corpus: about 1,106 hours in total, with roughly 181–197 training hours per language.
+
+## 8. Evaluation metrics
+
+Word error rate (WER) for transcription and accuracy for language identification.
+
+## 9. Results
+
+- The best model (w2v-BERT-2.0) reaches an **average WER of 30.48%**, ahead of the best OmniASR model (32.21%), which has about ten times the parameters.
+- Per-language WER: roughly 23% Amharic, 24% Oromo, 32% Sidaama, 35% Tigrinya and 38% Wolaytta.
+- Language identification accuracy is above 99.8% for all models.
+- Normalising vowel length and gemination cuts WER by about 10–13 points, so these contrasts cause a large share of errors.
+- Models learn language identification first, then Latin-script transcription, then Ge'ez-script transcription.
+
+## 10. Limitations
+
+OmniASR may have seen data overlapping the WAXAL test split, FLEURS references are noisy for some languages (native speakers judged 36.1% of Oromo FLEURS recordings unintelligible), gender imbalance in training data drives performance gaps, and end-to-end models capture vowel length and gemination poorly.
+
+## 11. Future research directions
+
+Explicit modelling of vowel length and gemination, and more demographically balanced data collection.
+
+## 12. Publication
+
+<PublicationList ids="ethio-asr-2026" />
+
+## 13. Code and supplementary materials
+
+- Code: [github.com/badrex/Ethio-ASR](https://github.com/badrex/Ethio-ASR)
+- Models: [huggingface.co/collections/badrex/ethio-asr](https://huggingface.co/collections/badrex/ethio-asr)

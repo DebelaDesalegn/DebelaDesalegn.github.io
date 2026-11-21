@@ -1,0 +1,75 @@
+---
+title: "Expanding the lexicon of Ge'ez-script languages: Amharic and Tigrinya"
+slug: vexmlm
+summary: VEXMLM extends XLM-R's vocabulary with 30,000 Ge'ez-script subwords, cutting tokenizer fertility by up to 45.9%, with mixed effects on downstream tasks.
+theme: Multilingual NLP
+status: preprint
+order: 7
+paper: vexmlm-2026
+---
+
+## 1. Research motivation
+
+Multilingual models such as XLM-R have Latin-centric vocabularies that split Amharic and Tigrinya words, written in the Ge'ez script, into many small pieces. This wastes sequence length and can hurt performance.
+
+## 2. Problem statement
+
+Adapt a pretrained multilingual model to Ge'ez-script languages by extending its vocabulary, and measure the effect on tokenization and on downstream tasks.
+
+## 3. Related work
+
+Vocabulary extension and continued pretraining have been used to adapt multilingual models to new languages; Glot500 broadens coverage to hundreds of languages, but Ge'ez-script segmentation remains inefficient.
+
+## 4. Research question
+
+Does adding language-specific Ge'ez-script subwords to XLM-R improve tokenization and downstream performance, and how much of any gain comes from continued pretraining?
+
+## 5. Methodology
+
+Separate SentencePiece unigram tokenizers were trained for Amharic and Tigrinya, and 30,000 pieces missing from XLM-R were added, growing its vocabulary from 250,002 to 280,002 entries without changing existing ones. New embeddings start at the mean of the original embeddings. Training has two stages: continued masked language modelling on monolingual text, then task fine-tuning.
+
+## 6. Experimental setup
+
+VEXMLM is compared with XLM-R and Glot500, with downstream results averaged over five seeds. An ablation on Tigrinya NER separates vocabulary expansion, initialisation and continued pretraining.
+
+## 7. Datasets
+
+| Task | Amharic | Tigrinya |
+| --- | --- | --- |
+| Named-entity recognition | MasakhaNER | Tigrinya NER dataset |
+| Question answering | AmQA | TIGQA |
+| Sentiment analysis | AfriSenti | — |
+
+## 8. Evaluation metrics
+
+Tokenizer fertility (subword tokens per word) and compression; accuracy and F1 for NER; accuracy for sentiment; exact match and F1 for QA.
+
+## 9. Results
+
+| Measure | XLM-R | VEXMLM |
+| --- | --- | --- |
+| Fertility, Amharic | 2.07 | **1.49** (-28.0%) |
+| Fertility, Tigrinya | 3.13 | **1.69** (-45.9%) |
+| NER accuracy, Amharic | 0.937 | **0.941** |
+| NER accuracy, Tigrinya | 0.943 | **0.952** |
+| QA F1, Amharic | **58.46** | 48.85 |
+| Sentiment accuracy, Amharic | 0.507 | 0.498 |
+
+The ablation shows that expanding the vocabulary alone lowers Tigrinya NER accuracy on out-of-vocabulary words (to about 87%), while the full model with continued pretraining beats the baseline (95.66% versus 94.57%).
+
+## 10. Limitations
+
+Only Amharic and Tigrinya were tested, the XLM-R downstream baseline used a single seed, the pretraining data's origin is undocumented, and the tokenizer is frequency-driven rather than morphology-aware.
+
+## 11. Future research directions
+
+Extending to other Ge'ez-script languages, morphology-aware tokenization, investigating the QA gap, and comparing with AfroXLMR and AfriBERTa under one protocol.
+
+## 12. Publication
+
+<PublicationList ids="vexmlm-2026" />
+
+## 13. Code and supplementary materials
+
+- Code: [github.com/hailaykidu/VEXMLM](https://github.com/hailaykidu/VEXMLM)
+- Model: [huggingface.co/Hailay/VEXMLM](https://huggingface.co/Hailay/VEXMLM)

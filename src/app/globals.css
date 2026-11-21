@@ -133,3 +133,15 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+.prose-research code::before,
+.prose-research code::after {
+  content: none;
+}
+.prose-research :not(pre) > code {
+  font-weight: 500;
+  font-size: 0.88em;
+  background: var(--shelf);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}

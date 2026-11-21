@@ -5,6 +5,7 @@ import { sortedPublications, manuscriptsUnderReview } from "@/data/publications"
 import { profile } from "@/data/profile";
 import { JsonLd, scholarlyArticleSchema } from "@/components/ui/json-ld";
 import { asset } from "@/lib/site";
+import { AuthorList } from "@/components/publications/author-list";
 
 export const metadata: Metadata = {
   title: "Publications",
@@ -44,10 +45,17 @@ export default function PublicationsPage() {
       <Section id="under-review" title="Manuscripts under review">
         <ul className="divide-y divide-rule">
           {manuscriptsUnderReview.map((m) => (
-            <li key={m.title} className="py-4 first:pt-0">
-              <p className="font-serif text-[1.1rem] font-[560]">{m.title}</p>
-              <p className="text-[0.9rem] text-ink-2">
-                <span className="font-medium text-accent">Debela Desalegn Yadeta</span> et al. <span className="font-serif italic">{m.venue}</span>.
+            <li key={m.id} id={m.id} className="py-5 first:pt-0">
+              <p className="font-serif text-[1.15rem] font-[560] leading-snug">{m.title}</p>
+              <div className="mt-1.5">
+                <AuthorList authors={m.authors} />
+              </div>
+              <p className="mt-1 text-[0.9rem] italic text-ink-2">Under review.</p>
+              <p className="mt-3 max-w-[70ch] text-[0.95rem] leading-relaxed">{m.summary}</p>
+              <p className="mt-2 flex flex-wrap gap-x-4 text-[0.88rem] text-ink-3">
+                {m.topics.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
               </p>
             </li>
           ))}

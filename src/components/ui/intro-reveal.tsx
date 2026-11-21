@@ -8,7 +8,7 @@ export function IntroReveal({ children }: { children: ReactNode[] }) {
   const reduce = useReducedMotion();
   return (
     <>
-      {children.map((child, i) => (
+      {children.filter(Boolean).map((child, i) => (
         <motion.div
           key={i}
           initial={reduce ? false : { opacity: 0, y: 8 }}

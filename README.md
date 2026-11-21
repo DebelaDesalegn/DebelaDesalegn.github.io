@@ -54,11 +54,8 @@ Create `src/content/projects/my-project.mdx` with frontmatter like the existing 
 ## Open items to fill in
 
 - [ ] `NEXT_PUBLIC_SITE_URL` (your real domain) for canonical URLs and Open Graph
-- [ ] Thesis abstract, experiments and findings (`src/content/thesis/thesis.mdx`), and the thesis PDF
-- [ ] Explainable-ML project: datasets, metrics, results, figures, code
-- [ ] Titles and co-authors of the three IEEE Access manuscripts
+- [ ] Explainable-ML project: figures and code links once public
 - [ ] Kifiya customer count: 875K+ is used; your other resume says 3.85M+ (`src/data/experience.ts`)
-- [ ] Optional: a Graph ML project page once you have work to show
 
 ## Local development
 
@@ -98,3 +95,7 @@ For GitHub Pages under a sub-path (e.g. `username.github.io/site`), also set `NE
 - Type: Source Serif 4 for headings and titles, IBM Plex Sans for body and navigation, both self-hosted via Fontsource.
 - Layout: a section-title gutter on the left and a reading column on the right, separated by hairlines.
 - Motion: one load sequence on the homepage introduction and the BibTeX expand; both respect `prefers-reduced-motion`.
+
+## CV
+
+The downloadable CV is `public/files/Debela_Desalegn_Yadeta_CV.pdf`. Its LaTeX source is `cv-source/cv.tex`; edit it and rebuild with `xelatex cv.tex` (uses the free Carlito font), or open it in Overleaf, then copy the new PDF over the one in `public/files/`.

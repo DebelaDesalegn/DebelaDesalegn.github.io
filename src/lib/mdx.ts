@@ -43,6 +43,10 @@ export interface ThesisFrontmatter {
   unit: string;
   year: number;
   evaluation: string;
+  date: string;
+  advisor: string;
+  repository: string | null;
+  keywords: string;
   pdf: string | null;
   code: string | null;
   [key: string]: unknown;

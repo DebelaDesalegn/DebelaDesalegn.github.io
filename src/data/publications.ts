@@ -1,4 +1,4 @@
-import type { Publication } from "@/types";
+import type { Manuscript, Publication } from "@/types";
 
 /**
  * Publication records.
@@ -312,7 +312,11 @@ export const publications: Publication[] = [
     topics: ["Speech", "Multilingual NLP"],
     summary:
       "A suite of multilingual CTC-based models that jointly perform speech recognition and language identification for Amharic, Tigrinya, Oromo, Sidaama and Wolaytta, trained on the WAXAL corpus. The best model reaches an average WER of 30.48% on the WAXAL test set, outperforming the strongest OmniASR model with far fewer parameters. Includes analyses of gender bias, vowel length and gemination errors, and training dynamics.",
-    links: { arxiv: "https://arxiv.org/abs/2603.23654", pdf: "https://arxiv.org/pdf/2603.23654" },
+    links: {
+      arxiv: "https://arxiv.org/abs/2603.23654",
+      pdf: "https://arxiv.org/pdf/2603.23654",
+      code: "https://github.com/badrex/Ethio-ASR",
+    },
     bibtex: `@misc{abdullah2026ethioasr,
     title = {Ethio-ASR: Joint Multilingual Speech Recognition and Language Identification for Ethiopian Languages},
     author = {Abdullah, Badr M. and Azime, Israel Abebe and Tonja, Atnafu Lambebo and Alabi, Jesujoba O. and Alemu, Abel Mulat and Hagos, Eyob G. and Balcha, Bontu Fufa and Nerea, Mulubrhan A. and Yadeta, Debela Desalegn and Marilign, Dagnachew Mekonnen and Fentahun, Amanuel Temesgen and Kebede, Tadesse and Gebru, Israel D. and Woldeyohannis, Michael Melese and Sewunetie, Walelign Tewabe and M{\\"o}bius, Bernd and Klakow, Dietrich},
@@ -355,13 +359,34 @@ export const publications: Publication[] = [
 ];
 
 /**
- * First-author manuscripts under review. Titles beyond the method names are
- * working titles from your CV; replace with the submitted titles and co-authors.
+ * First-author manuscripts under review. The venue is intentionally not shown.
+ * Titles, authors and summaries come from the submitted manuscripts.
  */
-export const manuscriptsUnderReview: { title: string; venue: string; note?: string }[] = [
-  { title: "DiffuSAGE: Diffusion Shapley Attribution with Gradient Explanations", venue: "Under review, IEEE Access" },
-  { title: "ExplainGen: Explainability for Generative Models", venue: "Under review, IEEE Access" },
-  { title: "FIFA: Firefly-Inspired Feature Attribution", venue: "Under review, IEEE Access" },
+export const manuscriptsUnderReview: Manuscript[] = [
+  {
+    id: "diffusage",
+    title: "DiffuSAGE: Spatio-Temporal Token Attribution for Deep Generative Diffusion Models",
+    authors: ["Debela Desalegn Yadeta", "Beakal Gizachew Assefa", "Azmeraw Bekele Yenew"],
+    summary:
+      "A hybrid attribution framework for text-to-image diffusion models that combines Aumann-Shapley values, Integrated Gradients and cross-attention maps to explain which prompt tokens matter, when in the denoising process they matter, and where in the image they act. On Stable Diffusion v1.5 it reaches an Insertion AUC of 0.82 and a Deletion AUC of 0.55, ahead of LIME, DF-RISE and DF-CAM, and a 51-participant user study finds strong agreement with human judgement.",
+    topics: ["Explainable AI", "Generative AI"],
+  },
+  {
+    id: "fifa",
+    title: "FIFA: Firefly-Inspired Feature Attribution for Faithful and Sparse Explanations in Tabular Models",
+    authors: ["Debela Desalegn Yadeta", "Beakal Gizachew Assefa"],
+    summary:
+      "A gradient-free, model-agnostic attribution method that uses a binary firefly algorithm to search for the smallest feature subset that preserves a model's prediction. Across Random Forest, XGBoost, CatBoost and TabNet on three benchmark datasets, it improves on LIME, SHAP and KernelSHAP by +9.15% Insertion AUC, -8.65% Deletion AUC, +6.24% sparsity and +75% stability.",
+    topics: ["Explainable AI", "Tabular ML"],
+  },
+  {
+    id: "explaingen",
+    title: "ExplainGen: Explainability Techniques in Generative Models",
+    authors: ["Debela Desalegn Yadeta", "Azmeraw Bekele Yenew", "Robbel Habtamu Yigzaw", "Beakal Gizachew Assefa"],
+    summary:
+      "A review of explainability for generative models (GANs, VAEs, energy-based, autoregressive and diffusion models) with a taxonomy by scope, method, data modality, problem type and architecture, a comparison of techniques and their trade-offs, and open challenges including robustness, consistency, ethics and regulation.",
+    topics: ["Explainable AI", "Generative AI", "Survey"],
+  },
 ];
 
 export const OWNER_NAME = "Debela Desalegn Yadeta";
