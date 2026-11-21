@@ -12,7 +12,7 @@ export const academicExperience: ExperienceItem[] = [
     location: "School of Information Technology and Engineering, Addis Ababa",
     roles: [{ title: "Part-time Lecturer (previously Teaching Assistant)", start: "Feb 2024", end: "Present" }],
     highlights: [
-      "Teach machine learning, natural language processing, computer vision and reinforcement learning, to about 60 students per semester.",
+      "Teach Fundamentals of AI, Machine Learning, Deep Learning, Reinforcement Learning, Natural Language Processing, Computer Vision, Robotics, Probabilistic Graphical Models, Advanced Algorithms, and Fundamentals of Data Structures and Algorithms, to about 60 students per semester.",
       "Supervised more than 30 student AI/ML projects.",
       "Develop practical learning materials and guide students in applying AI methods to technical problems.",
       "Support research and academic development in the school.",

@@ -9,7 +9,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/teaching" },
 };
 
-const courses = ["Machine learning", "Natural language processing", "Computer vision", "Reinforcement learning"];
+const courses = [
+  "Fundamentals of AI",
+  "Machine Learning",
+  "Deep Learning",
+  "Reinforcement Learning",
+  "Natural Language Processing (NLP)",
+  "Computer Vision",
+  "Robotics",
+  "Probabilistic Graphical Models",
+  "Advanced Algorithms",
+  "Fundamentals of Data Structures and Algorithms",
+];
 
 export default function TeachingPage() {
   return (

@@ -5,7 +5,7 @@ import { researchInterests, contributions } from "@/data/research";
 import { academicExperience, industryExperience, reviewing } from "@/data/experience";
 import { Section } from "@/components/ui/section";
 import { IntroReveal } from "@/components/ui/intro-reveal";
-import { ProfileLinks } from "@/components/ui/profile-links";
+import { ProfileLinkList } from "@/components/ui/profile-links";
 import { InterestList, ContributionItem } from "@/components/research/research-blocks";
 import { PublicationEntry } from "@/components/publications/publication-entry";
 import { ProjectList } from "@/components/projects/project-list";
@@ -20,44 +20,51 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1. Researcher introduction */}
-      <section className="grid gap-12 pb-16 pt-14 md:grid-cols-[1fr_17rem] md:gap-16 md:pb-20 md:pt-24">
-        <div className="max-w-[44rem]">
+      {/* 1. Researcher introduction: profile column + introduction */}
+      <section className="grid gap-10 pb-16 pt-12 md:grid-cols-[15rem_1fr] md:gap-16 md:pb-20 md:pt-20">
+        <aside aria-label="Profile" className="md:sticky md:top-24 md:self-start">
           <IntroReveal>
-            <h1 className="font-serif text-[2.6rem] font-[540] leading-[1.05] tracking-[-0.02em] md:text-[3.6rem]">{profile.name}</h1>
-            <p className="mt-3 text-[1rem] text-ink-2">
-              {profile.title}. {profile.location}.
-            </p>
             {profile.photo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={asset(profile.photo)}
                 alt={`Portrait of ${profile.name}`}
                 width={386}
-                height={482}
-                className="mt-8 aspect-[4/5] w-36 border border-rule object-cover md:w-44"
+                height={386}
+                className="h-40 w-40 rounded-full border border-rule object-cover object-top md:h-48 md:w-48"
               />
             ) : null}
-            <p className="mt-9 max-w-[26ch] font-serif text-[1.65rem] font-[420] italic leading-[1.25] tracking-[-0.01em] md:text-[2rem]">
-              {profile.headline}
+            <h1 className="mt-6 font-serif text-[1.85rem] font-[560] leading-[1.15] tracking-[-0.01em]">{profile.name}</h1>
+            <p className="mt-2 text-[0.95rem] leading-snug text-ink-2">{profile.title}</p>
+            <p className="mt-3 text-[0.9rem] leading-snug text-ink-3">
+              Addis Ababa University
+              <br />
+              Kifiya Financial Technology
+              <br />
+              {profile.location}
             </p>
-            <div className="mt-8 max-w-[64ch] space-y-4 text-[1.04rem] leading-[1.7]">
-              {profile.bio.map((para) => (
-                <p key={para.slice(0, 24)}>{para}</p>
-              ))}
-            </div>
-            <ProfileLinks className="mt-8 text-[0.95rem]" />
+            <ProfileLinkList />
           </IntroReveal>
-        </div>
-        <aside aria-labelledby="news-title" className="md:border-l md:border-rule md:pl-8 md:pt-2">
-          <h2 id="news-title" className="font-serif text-[1.1rem] font-[560]">
+        </aside>
+
+        <div className="min-w-0 max-w-[44rem]">
+          <p className="max-w-[28ch] font-serif text-[1.65rem] font-[420] italic leading-[1.25] tracking-[-0.01em] md:text-[2rem]">
+            {profile.headline}
+          </p>
+          <div className="mt-8 max-w-[64ch] space-y-4 text-[1.04rem] leading-[1.7]">
+            {profile.bio.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+
+          <h2 id="news-title" className="mt-12 font-serif text-[1.15rem] font-[560]">
             News
           </h2>
-          <ul className="mt-4 space-y-5">
+          <ul className="mt-4 divide-y divide-rule border-y border-rule">
             {news.map((n) => (
-              <li key={n.text}>
-                <p className="text-[0.82rem] tabular-nums text-ink-3">{n.date}</p>
-                <p className="mt-0.5 text-[0.92rem] leading-snug">
+              <li key={n.text} className="grid gap-1 py-3 sm:grid-cols-[6rem_1fr] sm:gap-6">
+                <span className="text-[0.88rem] tabular-nums text-ink-3">{n.date}</span>
+                <span className="text-[0.95rem] leading-snug">
                   {n.href ? (
                     <a href={n.href} target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline">
                       {n.text}
@@ -65,11 +72,11 @@ export default function HomePage() {
                   ) : (
                     n.text
                   )}
-                </p>
+                </span>
               </li>
             ))}
           </ul>
-        </aside>
+        </div>
       </section>
 
       {/* 2. Research interests */}
@@ -137,7 +144,7 @@ export default function HomePage() {
       {/* 9. Teaching and service */}
       <Section id="teaching" title="Teaching and service" more={{ href: "/teaching", label: "Teaching and service" }}>
         <p className="max-w-[68ch] leading-relaxed">
-          I teach machine learning, NLP, computer vision and reinforcement learning at Addis Ababa University, where I have supervised more than 30
+          I teach courses from Fundamentals of AI, Machine Learning and Deep Learning to NLP, Computer Vision, Robotics, Reinforcement Learning, Probabilistic Graphical Models and Advanced Algorithms at Addis Ababa University, where I have supervised more than 30
           student AI/ML projects, and {teaching ? "I train practitioners in applied ML and LLMs as an instructor at Aperion AI." : ""}
         </p>
         <h3 className="mb-3 mt-8 font-serif text-[1.08rem] font-[560]">Reviewing</h3>
